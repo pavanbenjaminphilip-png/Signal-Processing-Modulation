@@ -1,0 +1,15 @@
+# Exclude large binaries and temporary files
+*.zip
+*.docx
+*.pdf
+*.xlsx
+.vscode/
+__pycache__/
+*.pyc
+*.mat
+*.fig
+# Keep the MATLAB code and python scripts
+!QAM.m
+!awgn_server.py
+!qam8_awgn_wifi_2025.m
+!QAM
