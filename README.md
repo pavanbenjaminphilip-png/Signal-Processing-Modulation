@@ -1,41 +1,76 @@
-# Signal Processing Modulation Processes
+# Signal Processing & Communications: 8-QAM Modulation System
 
-This repository contains simulations and implementations of digital modulation schemes, specifically focusing on **8-QAM (Quadrature Amplitude Modulation)** and channel modeling using **AWGN (Additive White Gaussian Noise)**.
+![MATLAB](https://img.shields.io/badge/MATLAB-Simulation-orange.svg) 
+![Python](https://img.shields.io/badge/Python-AWGN_Server-blue.svg)
+![Status](https://img.shields.io/badge/Status-Project_Submission_Complete-green.svg)
 
-## Project Overview
-This project demonstrates the complete signal flow of a digital communication system:
-1.  **Digital Input**: Generation of binary data.
-2.  **Vector Encoding**: Mapping bits to constellation points.
-3.  **Carrier Modulation**: Implementing coherent modulation (I & Q carriers).
-4.  **Channel Modeling**: Simulating signal attenuation and AWGN.
-5.  **Demodulation**: Correlator-based coherent demodulation.
-6.  **Detection**: Maximum Likelihood (ML) detection using Euclidean distance.
-7.  **Performance Analysis**: Bit Error Rate (BER) calculation and visualization.
+## 📡 Project Overview
+This repository contains the complete implementation and simulation of a **Digital Communication System** developed for the Signal Processing and Communications module. The core focus is on **8-QAM (Quadrature Amplitude Modulation)**, utilizing coherent detection and Maximum Likelihood (ML) estimation in a noisy channel environment.
 
-## Contents
--   `QAM.m`: A comprehensive MATLAB script for 8-QAM software simulation, including performance analysis and detailed visualization of constellation diagrams and time-domain signals.
--   `awgn_server.py`: A Python-based server designed to handle carrier-modulated signals, add controllable AWGN noise, and facilitate communication (useful for hardware-in-the-loop simulations, e.g., with Raspberry Pi).
--   `qam8_awgn_wifi_2025.m`: Refined 8-QAM simulation script.
+### 🛠 System Architecture
+The system follows a classic communication pipeline:
+1.  **Source Coding**: Binary data generation (user-defined or default).
+2.  **Vector Encoding**: Mapping triplets of bits to a normalized 8-point constellation.
+3.  **Modulation**: Coherent carrier modulation using orthogonal basis functions ($\phi_1 = \cos(2\pi f_c t)$ and $\phi_2 = \sin(2\pi f_c t)$).
+4.  **Channel Modeling**: Simulation of **AWGN (Additive White Gaussian Noise)** and channel attenuation ($h$).
+5.  **Demodulation**: Correlation-based coherent demodulation using trapezoidal integration.
+6.  **ML Detection**: Optimal decision making based on minimum Euclidean distance in the signal space.
+7.  **Analysis**: Comprehensive BER (Bit Error Rate) performance evaluation and signal visualization.
 
-## Key Features
--   **High Resolution**: Simulates high-frequency carriers (e.g., 10 MHz) with high sampling rates.
--   **Realistic Channel**: Includes both attenuation factor ($h$) and SNR-based noise.
--   **Visual Excellence**: Generates multiple plots including:
-    -   Digital bitstreams (Input vs. Output).
-    -   Modulated carrier waveforms.
-    -   Signal constellations (Ideal, Transmitted, Received, and Detected).
-    -   Error distribution analysis.
+---
 
-## Getting Started
-### MATLAB Simulation
-1.  Open `QAM.m` in MATLAB.
-2.  Run the script.
-3.  Enter your binary input sequence (multiple of 3 bits) when prompted.
-4.  Specify the desired SNR (dB) and channel attenuation ($h$).
+## 📂 Repository Contents
+The project is structured into simulation scripts and communication utilities:
 
-### Python AWGN Server
-1.  Run `python awgn_server.py`.
-2.  The server listens on port 5000 for incoming signal samples to process with noise.
+| File | Type | Description |
+| :--- | :--- | :--- |
+| `QAM.m` | MATLAB | **Primary Simulation Engine**. Handles the full 8-QAM lifecycle, from bit mapping to BER visualization. |
+| `awgn_server.py` | Python | **Networked Noise Server**. A TCP-based utility that simulates a remote AWGN channel, allowing for hardware-aware testing. |
+| `qam8_awgn_wifi_2025.m` | MATLAB | Refined simulation variant optimized for the 2025 technical specifications. |
+| `Signal Processing And Communications Final Project.docx` | Documentation | Detailed project report covering theoretical background and results (available in submission zip). |
 
-## Author
+---
+
+## 🚀 Key Technical Features
+### 1. 8-QAM Constellation Mapping
+The system maps 3-bit sequences to eight distinct points in the I-Q plane, normalized to ensure unit average energy.
+*   **Modulation Order ($M$)**: 8
+*   **Symbol Depth**: 3 bits/symbol
+
+### 2. Carrier Modulation
+Implements high-frequency carrier wave modulation:
+*   **Carrier Frequency ($f_c$)**: 10 MHz
+*   **Sampling Density**: 100 samples per symbol for high-resolution time-domain analysis.
+
+### 3. Channel Simulation & ML Detection
+The receiver implements an optimal **Maximum Likelihood (ML)** detector. The decision rule minimizes the Euclidean distance between the received vector $\mathbf{r}$ and the constellation points $\mathbf{s}_i$:
+$$\hat{\mathbf{s}} = \arg \min_{\mathbf{s}_i \in \mathcal{C}} \|\mathbf{r} - \mathbf{s}_i\|^2$$
+
+---
+
+## 📊 Visualizations
+The simulation generates a multi-panel dashboard providing insights into:
+*   **Time-Domain Analysis**: Input bitstreams vs. reconstructed output signals.
+*   **Constellation Diagrams**: Comparative views of Ideal, Transmitted, and Noisy (Received) constellations.
+*   **Performance Metrics**: Automated Bit Error Rate (BER) calculation and Accuracy percentage.
+
+---
+
+## 🛠 Usage Instructions
+### Running the MATLAB Simulation
+1.  Launch `QAM.m` in MATLAB.
+2.  Follow the prompts to enter a binary sequence (multiples of 3).
+3.  Adjust parameters for **SNR (dB)** and **Attenuation ($h$)** to observe system robustness.
+
+### Utilizing the AWGN Server
+For remote channel simulation:
+```bash
+python awgn_server.py
+```
+*The server will listen on port 5000, ready to process incoming signal samples with additive noise.*
+
+---
+
+## 🏆 Author
 **Pavan Benjamin Philip**
+*Middlesex University - Signal Processing and Communications*
