@@ -1,6 +1,6 @@
 # Exclude large binaries and temporary files
 *.zip
-*.docx
+# *.docx  <-- Allowed for the project report
 *.pdf
 *.xlsx
 .vscode/
@@ -13,3 +13,4 @@ __pycache__/
 !awgn_server.py
 !qam8_awgn_wifi_2025.m
 !QAM
+!"Signal Processing And Communications Final Project.docx"
